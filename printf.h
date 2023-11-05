@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:00:39 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/03 13:33:52 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:40:41 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # include <stdarg.h>
 # include "libft.h"
 
-void	print_chr(va_list ap, size_t count);
-void	print_str(va_list ap, size_t count);
-void	print_dec(va_list ap, size_t count);
-void	ft_putnbr_fd_pr(int n, int fd, size_t count);
+int	print_chr(va_list ap);
+int	print_str(va_list ap);
+int	print_dec(va_list ap);
+int	ft_putnbr_fd_pr(int n, int fd, size_t count);
+void	ft_putnbr_base(int nbr, char *base);
 
 #endif
