@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:58:20 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/05 18:33:56 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:15:40 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_check_base(char *base, int *size)
+int	ft_check_base(char *base, unsigned int *size)
 {
 	int	j;
 	int	i;
@@ -37,16 +37,14 @@ int	ft_check_base(char *base, int *size)
 	return (1);
 }
 
-void	ft_putnbr_base(int nbr, char *base, size_t count)
+int	ft_putnbr_base(unsigned int n, char *base, size_t count)
 {
-	int			r;
-	long int	n;
-	int			size;
+	int				r;
+	unsigned int	size;
 
 	r = ft_check_base(base, &size);
 	if (r == 1)
 	{
-		n = nbr;
 		if (n < 0)
 		{
 			ft_putchar_fd('-', 1);
@@ -55,7 +53,7 @@ void	ft_putnbr_base(int nbr, char *base, size_t count)
 		}
 		if (n < size)
 		{
-			ft_putchar_fd(&base[n], 1);
+			ft_putchar_fd(base[n], 1);
 			count++;
 		}
 		else if (n >= size)
@@ -64,4 +62,5 @@ void	ft_putnbr_base(int nbr, char *base, size_t count)
 			ft_putnbr_base(n % size, base, count);
 		}
 	}
+	return (count);
 }

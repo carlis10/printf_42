@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   printf_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:19:26 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/05 18:39:35 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:54:05 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	print_chr(va_list ap)
+int	print_chr(char chr)
 {
-	char	chr;
-
-	chr = (char) va_arg(ap, char);
-	ft_putstr_fd(chr, 0);
+	ft_putchar_fd(chr, 1);
 	return (1);
 }
 
@@ -26,24 +23,11 @@ int	print_str(va_list ap)
 	char	*str;
 
 	str = va_arg(ap, char *);
-	ft_putstr_fd(str, 0);
+	ft_putstr_fd(str, 1);
 	return (ft_strlen(str));
 }
 
-void	print_void(va_list ap, size_t count)
+int	print_void(va_list ap)
 {
-	void	*arg;
-
-	arg = va_arg(ap, void *);
-	
-}
-
-void	print_dec(va_list ap, size_t count)
-{
-	
-}
-
-void	print_int(va_list ap, size_t count)
-{
-	
+	return (ft_putnbr_base(va_arg(ap, unsigned int), "0123456789abcdef", 0));
 }
