@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/07 15:50:01 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/15 11:50:26 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	read_arg(char chr, va_list ap, size_t count)
 	if (chr == 'c')
 		count = print_chr((char) va_arg(ap, int));
 	else if (chr == 's')
-		count = print_str(ap);
+		count = print_str(va_arg(ap, char *));
 	else if (chr == 'p')
 		count = print_void(ap);
 	else if (chr == 'd' || chr == 'i')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:19:26 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/07 15:54:05 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/15 12:54:20 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ int	print_chr(char chr)
 	return (1);
 }
 
-int	print_str(va_list ap)
+int	print_str(char *str)
 {
-	char	*str;
-
-	str = va_arg(ap, char *);
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
 	ft_putstr_fd(str, 1);
 	return (ft_strlen(str));
 }
 
 int	print_void(va_list ap)
 {
-	return (ft_putnbr_base(va_arg(ap, unsigned int), "0123456789abcdef", 0));
+	ft_putstr_fd("0x", 1);
+	return (ft_putnbr_base(va_arg(ap, unsigned long), "0123456789abcdef", 2));
 }

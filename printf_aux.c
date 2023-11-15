@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_aux.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:27:37 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/06 13:15:46 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/15 12:30:11 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	ft_putnbr_fd_pr(int n, int fd, size_t count)
 	}
 	if (nl > 9)
 	{
-		ft_putnbr_fd_pr(nl / 10, fd, count);
-		ft_putnbr_fd_pr(nl % 10, fd, count);
+		count = ft_putnbr_fd_pr(nl / 10, fd, count);
+		count = ft_putnbr_fd_pr(nl % 10, fd, count);
 	}
 	else
 	{
@@ -44,8 +44,8 @@ int	ft_putnbr_fd_pr_unint(unsigned int nl, int fd, size_t count)
 
 	if (nl > 9)
 	{
-		ft_putnbr_fd_pr(nl / 10, fd, count);
-		ft_putnbr_fd_pr(nl % 10, fd, count);
+		count = ft_putnbr_fd_pr(nl / 10, fd, count);
+		count = ft_putnbr_fd_pr(nl % 10, fd, count);
 	}
 	else
 	{
@@ -63,7 +63,14 @@ void	ft_putchar_fd(char c, int fd)
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	write(fd, s, ft_strlen(s));
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
 }
 
 int	ft_strlen(const char *s)
