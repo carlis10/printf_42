@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+         #
+#    By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 12:56:54 by Carlos            #+#    #+#              #
-#    Updated: 2023/11/16 13:01:52 by cravegli         ###   ########.fr        #
+#    Updated: 2023/11/20 15:33:57 by Carlos           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,13 @@ SRC = printf_aux.c printf_utils.c ft_printf.c ft_putnbr_base.c
 OBJ = ${SRC:.c=.o}
 
 BONUS = ft_printf_bonus.c printf_utils_bonus.c printf_aux_bonus.c \
-		ft_printf_extra_bonus.c
+		ft_printf_extra_bonus.c ft_add_size_bonus.c
 
 BONUS_OBJ = ${BONUS:.c=.o}
 
 CFLAGS = -Wall -Wextra -Werror
 
-CC = gcc $(CFLAGS) -c $(SRC)
+CC = gcc $(CFLAGS) -c
 
 LIB = ar rc $(NAME)
 
@@ -32,15 +32,15 @@ RANLIB = ranlib $(NAME)
 RM = rm -f
 
 $(NAME):
-	@$(CC)
+	@$(CC) $(SRC)
 	@$(LIB) $(OBJ)
 	@$(RANLIB)
 
 bonus:
 	@$(CC) $(BONUS)
-	@$(LIB) $(OBJ) $(BONUS_OBJ)
+	@$(LIB) $(BONUS_OBJ)
 	@$(RANLIB)
-	
+
 all: $(NAME)
 
 clean:
