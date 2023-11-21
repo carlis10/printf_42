@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:19:26 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/21 11:28:36 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/21 23:06:46 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,33 @@ int	print_str(char *str, char *flags, int size)
 
 int	print_num(int n, char *flags, int size)
 {
-	int	count;
+	int			count;
+	long int	nl;
 
 	count = 0;
 	if (ft_strchr(flags, ' ') && !(ft_strchr(flags, '+')) && \
-		n > 0)
+		n >= 0)
 	{
 		ft_putchar_fd(' ', 1);
 		count++;
 	}
-	if (ft_strchr(flags, '+') && (n > 0))
+	if (ft_strchr(flags, '+') && (n >= 0))
 	{
 		ft_putchar_fd('+', 1);
 		count++;
 	}
 	count = ft_count_nbr(n, count);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', 1);
+		count++;
+		nl = -n;
+	}
+	else
+		nl = n;
 	if (count < size && !(ft_strchr(flags, '-')))
 		count += ft_add_size(flags, (size - count));
-	ft_putnbr_fd_pr(n, 1, count);
+	ft_putnbr_fd_pr(nl, 1, count);
 	return (count);
 }
 
@@ -70,7 +79,7 @@ int	print_hexa(unsigned int n, char *base, char *flags, int size)
 	int	count;
 
 	count = 0;
-	if (ft_strchr(flags, '#'))
+	if (ft_strchr(flags, '#') && n != 0)
 	{
 		ft_putchar_fd('0', 1);
 		if (ft_strchr(base, 'f'))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/21 14:33:43 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:32:32 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int	ft_printf(char const *str, ...)
 	return (count);
 }
 
-int	main()
+/* int	main()
 {
 	int	n;
 
-	n = 1;
-	ft_printf("Propia Bytes: %i\n",ft_printf("%p", &n));
-	ft_printf("Original Bytes: %i\n",printf("%p"), &n);
+	n = 5;
+	ft_printf("Propia Bytes: %i\n",ft_printf(" %p ", -15));
+	ft_printf("Original Bytes: %i\n",printf(" %p ", -15));
 	return (0);
-}
+} */

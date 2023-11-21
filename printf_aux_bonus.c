@@ -6,7 +6,7 @@
 /*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:27:37 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/16 21:52:05 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/21 23:04:34 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int	ft_count_nbr(int n, size_t count)
 
 	nl = n;
 	if (nl < 0)
-	{
 		nl = -nl;
-		count++;
-	}
 	if (nl > 9)
 	{
 		count = ft_count_nbr(nl / 10, count);

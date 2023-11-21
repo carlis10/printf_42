@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:58:20 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/21 11:10:20 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:27:29 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putnbr_base(unsigned long n, char *base, size_t count)
 {
-	unsigned int	size;
+	unsigned long	size;
 
 	size = ft_strlen(base);
 	if (n < size)

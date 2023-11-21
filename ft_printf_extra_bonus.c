@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_extra_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:58:20 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/21 11:41:52 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/21 22:59:01 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,10 @@ char	*ft_str_add_char(char *str, char chr)
 	return (res);
 }
 
-int	ft_putnbr_fd_pr(int n, int fd, size_t count)
+int	ft_putnbr_fd_pr(long int nl, int fd, size_t count)
 {
-	long int	nl;
 	char		c;
 
-	nl = n;
-	if (nl < 0)
-	{
-		nl = -nl;
-		ft_putchar_fd('-', fd);
-		count++;
-	}
 	if (nl > 9)
 	{
 		count = ft_putnbr_fd_pr(nl / 10, fd, count);
