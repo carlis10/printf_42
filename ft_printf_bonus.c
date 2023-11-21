@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/20 19:02:44 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/21 14:31:38 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	read_arg(char chr, va_list ap, int size, char *flags)
 		count = print_hexa(va_arg(ap, unsigned int), UPP_HEX, flags, size);
 	else if (chr == '%')
 	{
+		if (1 < size && !(ft_strchr(flags, '-')))
+			count += ft_add_size(flags, (size - 1));
 		ft_putchar_fd(chr, 1);
 		count++;
 	}
@@ -84,15 +86,21 @@ int	check_flag(char const *str, va_list ap, int *i)
 
 	flags = (char *)ft_calloc(1, 1);
 	count = 0;
+	size = 0;
+	size = get_size(str, i, size);
 	while (str[*i + 1] == '#' || str[*i + 1] == '+' || str[*i + 1] == ' ' || \
 			str[*i + 1] == '.' || str[*i + 1] == '0' || str[*i + 1] == '-')
 	{
-		tmp = flags;
-		flags = ft_str_add_char(tmp, str[*i + 1]);
-		free(tmp);
+		if (!(str[*i + 1] == '.' && size != 0))
+		{
+			tmp = flags;
+			free(tmp);
+			flags = ft_str_add_char(tmp, str[*i + 1]);
+		}
 		i[0]++;
+		size = get_size(str, i, size);
 	}
-	size = get_size(str, i);
+	size = get_size(str, i, size);
 	count += read_arg(str[*i + 1], ap, size, flags);
 	if (count < size && ft_strchr(flags, '-'))
 		count += ft_add_size(flags, (size - count));
@@ -100,7 +108,7 @@ int	check_flag(char const *str, va_list ap, int *i)
 	return (count);
 }
 
-int	get_size(char const *str, int *i)
+int	get_size(char const *str, int *i, int s)
 {
 	int	size;
 
@@ -111,13 +119,14 @@ int	get_size(char const *str, int *i)
 		size += str[*i + 1] - '0';
 		i[0]++;
 	}
+	if (s != 0 && size == 0)
+		return (s);
 	return (size);
 }
 
 /* int	main()
 {
-	ft_printf("Propia Bytes: %i\n",ft_printf("% i.\n", -59));
-	ft_printf("Original Bytes: %i\n",printf("% i.\n", -59));
-	system("leaks a.out && ./a.out");
+	ft_printf("Propia Bytes: %i\n",ft_printf("%p", 1));
+	ft_printf("Original Bytes: %i\n",printf("%p"), 1);
 	return (0);
 } */

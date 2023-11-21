@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/15 11:50:26 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:33:43 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,14 @@ int	ft_printf(char const *str, ...)
 	}
 	va_end(ap);
 	return (count);
+}
+
+int	main()
+{
+	int	n;
+
+	n = 1;
+	ft_printf("Propia Bytes: %i\n",ft_printf("%p", &n));
+	ft_printf("Original Bytes: %i\n",printf("%p"), &n);
+	return (0);
 }

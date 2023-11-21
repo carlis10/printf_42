@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:00:39 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/20 18:58:49 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/21 14:09:14 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ int		ft_putnbr_fd_pr_unint(unsigned int nl, int fd, size_t count);
 int		ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
-int		get_size(char const *str, int *i);
+int		get_size(char const *str, int *i, int s);
 
 #endif

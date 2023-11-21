@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:19:26 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/20 18:51:10 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:28:36 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ int	print_str(char *str, char *flags, int size)
 
 	if (!str)
 	{
+		count = 6;
+		if (count < size && !(ft_strchr(flags, '-')))
+			count += ft_add_size(flags, (size - count));
 		ft_putstr_fd("(null)", 1);
-		return (6);
+		return (count);
 	}
 	count = ft_strlen(str);
 	if (count < size && !(ft_strchr(flags, '-')))
