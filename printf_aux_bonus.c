@@ -6,7 +6,7 @@
 /*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:27:37 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/21 23:04:34 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/27 15:34:55 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	ft_count_unint(unsigned int nl, size_t count)
 	return (count);
 }
 
-int	print_unint(unsigned int n, char *flags, int size)
+int	print_unint(unsigned int n, char *flags, t_format size)
 {
 	int	count;
 
 	count = ft_count_unint(n, 0);
-	if (count < size)
-		count += ft_add_size(flags, (size - count));
+	if (count < size.last && !(ft_strchr(flags, '-')))
+		count += ft_add_size(flags, (size.last - count), 1);
 	ft_putnbr_fd_pr_unint(n, 1, count);
 	return (count);
 }
@@ -66,4 +66,20 @@ char	*ft_strchr(const char *s, int c)
 	if (s[i] == (char)c)
 		return ((char *)(s + i));
 	return (NULL);
+}
+
+int		print_num_extra(char *flags, int n, int count)
+{
+	if (ft_strchr(flags, ' ') && !(ft_strchr(flags, '+')) && \
+		n >= 0)
+	{
+		ft_putchar_fd(' ', 1);
+		count++;
+	}
+	if (ft_strchr(flags, '+') && (n >= 0))
+	{
+		ft_putchar_fd('+', 1);
+		count++;
+	}
+	return (count);
 }

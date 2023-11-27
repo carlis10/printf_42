@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/22 12:28:16 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:03:03 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 #include <stdio.h>
 
-int	read_arg(char chr, va_list ap, int size, char *flags)
+int	read_arg(char chr, va_list ap, t_format size, char *flags)
 {
 	size_t	count;
 
@@ -34,8 +34,8 @@ int	read_arg(char chr, va_list ap, int size, char *flags)
 		count = print_hexa(va_arg(ap, unsigned int), UPP_HEX, flags, size);
 	else if (chr == '%')
 	{
-		if (1 < size && !(ft_strchr(flags, '-')))
-			count += ft_add_size(flags, (size - 1));
+		if (1 < size.min && !(ft_strchr(flags, '-')))
+			count += ft_add_size(flags, (size.min - 1), 0);
 		ft_putchar_fd(chr, 1);
 		count++;
 	}
@@ -80,40 +80,39 @@ int	ft_printf_cont(char const *str, va_list ap, size_t count, int i)
 int	check_flag(char const *str, va_list ap, int *i)
 {
 	int		count;
-	int		size;
+	t_format	size;
 	char	*flags;
 	char	*tmp;
 
 	flags = (char *)ft_calloc(1, 1);
 	count = 0;
-	size = 0;
-	size = get_size(str, i, size);
+	size.last = 0;
+	size.max = 0;
+	size.min = 0;
+	size = get_size(str, i, size, flags);
 	while (str[*i + 1] == '#' || str[*i + 1] == '+' || str[*i + 1] == ' ' || \
 			str[*i + 1] == '.' || str[*i + 1] == '0' || str[*i + 1] == '-')
 	{
-		if (!(str[*i + 1] == '.' && size != 0))
-		{
-			tmp = flags;
-			free(tmp);
-			flags = ft_str_add_char(tmp, str[*i + 1]);
-		}
+		tmp = flags;
+		free(tmp);
+		flags = ft_str_add_char(tmp, str[*i + 1]);
 		i[0]++;
-		size = get_size(str, i, size);
+		if ((str[*i + 1] >= '0' && str[*i + 1] <= '9') || ft_strchr(flags, '.'))
+			size = get_size(str, i, size, flags);
 	}
-	size = get_size(str, i, size);
 	count += read_arg(str[*i + 1], ap, size, flags);
-	if (count < size && ft_strchr(flags, '-'))
-		count += ft_add_size(flags, (size - count));
+	if (count < size.min && ft_strchr(flags, '-'))
+		count += ft_add_size(flags, (size.min - count), 0);
 	free(flags);
 	return (count);
 }
 
-int	get_size(char const *str, int *i, int s)
+t_format	get_size(char const *str, int *i, t_format s, char *flags)
 {
 	int	size;
 
 	size = 0;
-	if (s == 0 && str[*i + 1] == '0')
+	if (s.min == 0 && str[*i + 1] == '0')
 		return (s);
 	while (str[*i + 1] >= '0' && str[*i + 1] <= '9')
 	{
@@ -121,15 +120,21 @@ int	get_size(char const *str, int *i, int s)
 		size += str[*i + 1] - '0';
 		i[0]++;
 	}
-	if (s != 0 && size == 0)
-		return (s);
-	return (size);
+	if (!(ft_strchr(flags, '.')))
+	{
+		s.min = size;
+		s.max = -1;
+	}
+	else
+		s.max = size;
+	s.last = size;
+	return (s);
 }
 
 int	main()
 {
-	ft_printf("Propia Bytes: %i\n",ft_printf("%-c, %-c, %-c", '5', 'x', '\n'));
-	ft_printf("Original Bytes: %i\n",printf("%-c, %-c, %-c", '5', 'x', '\n'));
-	system("leaks");
+	printf("propia Bytes: %i\n",ft_printf("%.s\n", "a"));
+	printf("Original Bytes: %i\n",printf("%.s\n", "a"));
+	//system("leaks");
 	return (0);
 }
