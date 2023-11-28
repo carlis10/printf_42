@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_size_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 19:50:23 by Carlos            #+#    #+#             */
-/*   Updated: 2023/11/27 16:02:41 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/28 12:56:35 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_add_size(char *flags, int diff, int isNum)
 	i = 0;
 	chr = ' ';
 	if ((ft_strchr(flags, '.') || ft_strchr(flags, '0')) \
-		&& !(ft_strchr(flags, '-')) && (isNum == 1))
+		&& (!(ft_strchr(flags, '-')) && (isNum == 1)))
 		chr = '0';
 	while (i < diff)
 	{

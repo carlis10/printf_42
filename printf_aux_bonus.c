@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_aux_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:27:37 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/27 15:34:55 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:44:38 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,14 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-int		print_num_extra(char *flags, int n, int count)
+int	print_num_extra(char *flags, int n, int count)
 {
 	if (ft_strchr(flags, ' ') && !(ft_strchr(flags, '+')) && \
 		n >= 0)
-	{
 		ft_putchar_fd(' ', 1);
-		count++;
-	}
 	if (ft_strchr(flags, '+') && (n >= 0))
-	{
 		ft_putchar_fd('+', 1);
-		count++;
-	}
+	if (n < 0)
+		ft_putchar_fd('-', 1);
 	return (count);
 }

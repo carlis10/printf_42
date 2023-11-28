@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/27 16:03:03 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:53:06 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	read_arg(char chr, va_list ap, t_format size, char *flags)
 	else if (chr == '%')
 	{
 		if (1 < size.min && !(ft_strchr(flags, '-')))
-			count += ft_add_size(flags, (size.min - 1), 0);
+			count += ft_add_size(flags, (size.min - 1), 1);
 		ft_putchar_fd(chr, 1);
 		count++;
 	}
@@ -79,10 +79,10 @@ int	ft_printf_cont(char const *str, va_list ap, size_t count, int i)
 
 int	check_flag(char const *str, va_list ap, int *i)
 {
-	int		count;
+	int			count;
 	t_format	size;
-	char	*flags;
-	char	*tmp;
+	char		*flags;
+	char		*tmp;
 
 	flags = (char *)ft_calloc(1, 1);
 	count = 0;
@@ -94,8 +94,8 @@ int	check_flag(char const *str, va_list ap, int *i)
 			str[*i + 1] == '.' || str[*i + 1] == '0' || str[*i + 1] == '-')
 	{
 		tmp = flags;
-		free(tmp);
 		flags = ft_str_add_char(tmp, str[*i + 1]);
+		free(tmp);
 		i[0]++;
 		if ((str[*i + 1] >= '0' && str[*i + 1] <= '9') || ft_strchr(flags, '.'))
 			size = get_size(str, i, size, flags);
@@ -133,8 +133,8 @@ t_format	get_size(char const *str, int *i, t_format s, char *flags)
 
 int	main()
 {
-	printf("propia Bytes: %i\n",ft_printf("%.s\n", "a"));
-	printf("Original Bytes: %i\n",printf("%.s\n", "a"));
+	printf("propia Bytes: %i\n",ft_printf("42%.26d42", 0));
+	printf("Original Bytes: %i\n",printf("42%.26d42", 0));
 	//system("leaks");
 	return (0);
 }
