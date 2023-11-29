@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:58:20 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/28 12:54:01 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:18:39 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_str_add_char(char *str, char chr)
 	char	*res;
 	int		i;
 
-	res = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(chr));
+	res = (char *)ft_calloc(ft_strlen(str) + 2, sizeof(chr));
 	i = 0;
 	while (str[i])
 	{

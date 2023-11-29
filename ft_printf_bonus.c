@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/28 14:53:06 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:25:04 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ int	check_flag(char const *str, va_list ap, int *i)
 
 	flags = (char *)ft_calloc(1, 1);
 	count = 0;
-	size.last = 0;
-	size.max = 0;
-	size.min = 0;
+	size = init_size(0);
 	size = get_size(str, i, size, flags);
 	while (str[*i + 1] == '#' || str[*i + 1] == '+' || str[*i + 1] == ' ' || \
 			str[*i + 1] == '.' || str[*i + 1] == '0' || str[*i + 1] == '-')
@@ -133,8 +131,8 @@ t_format	get_size(char const *str, int *i, t_format s, char *flags)
 
 int	main()
 {
-	printf("propia Bytes: %i\n",ft_printf("42%.26d42", 0));
-	printf("Original Bytes: %i\n",printf("42%.26d42", 0));
+	printf("Propia Bytes: %i\n",ft_printf("!%5x!", 52625));
+	printf("Original Bytes: %i\n",printf("!%5x!", 52625));
 	//system("leaks");
 	return (0);
 }

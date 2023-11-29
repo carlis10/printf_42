@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:19:26 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/28 14:53:51 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:17:58 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,13 @@ int	print_num(int n, char *flags, t_format size)
 	unsigned int	nl;
 
 	count = 0;
-	if (ft_strchr(flags, ' ') || ft_strchr(flags, '+') || n < 0)
-	{
-		if (ft_strchr(flags, '.') || ft_strchr(flags, '0'))
-			print_num_extra(flags, n, count);
-		count++;
-	}
-	count = ft_count_nbr(n, count);
-	if (count < size.last && !(ft_strchr(flags, '-')))
-		count = ft_add_size(flags, (size.last - count), 1);
-	else
-		count = 0;
-	if (ft_strchr(flags, ' ') || ft_strchr(flags, '+') || n < 0)
-	{
-		if (!ft_strchr(flags, '.') && !ft_strchr(flags, '0'))
-			print_num_extra(flags, n, count);
-		count++;
-	}
-	if (n < 0)
-		nl = -n;
-	else
+	count = print_num_cont(flags, n, count, size);
+	if (n > 0)
 		nl = n;
+	else
+		nl = -n;
+	if (ft_strchr(flags, '.') && nl == 0 && size.max == 0)
+		return (count);
 	count = ft_putnbr_fd_pr(nl, 1, count);
 	return (count);
 }
@@ -77,13 +63,6 @@ int	print_hexa(unsigned int n, char *base, char *flags, t_format size)
 	int	count;
 
 	count = 0;
-	count = ft_countnbr_base(n, base, count);
-	if (ft_strchr(flags, '#'))
-		count += 2;
-	if (count < size.last && !(ft_strchr(flags, '-')))
-		count = ft_add_size(flags, (size.last - count), 1);
-	else
-		count = 0;
 	if (ft_strchr(flags, '#') && n != 0)
 	{
 		ft_putchar_fd('0', 1);
@@ -93,6 +72,9 @@ int	print_hexa(unsigned int n, char *base, char *flags, t_format size)
 			ft_putchar_fd('X', 1);
 		count += 2;
 	}
+	count = un_cont(flags, n, count, size);
+	if (ft_strchr(flags, '.') && n == 0 && size.max == 0)
+		return (count);
 	count = ft_putnbr_base(n, base, count);
 	return (count);
 }

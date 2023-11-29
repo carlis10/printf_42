@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:00:39 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/28 14:24:08 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:20:10 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ char		*ft_strchr(const char *s, int c);
 void		*ft_calloc(size_t count, size_t size);
 int			ft_printf_cont(char const *str, va_list ap, size_t count, int i);
 char		*ft_str_add_char(char *str, char chr);
-int			ft_count_unint(unsigned int nl, size_t count);
-int			ft_count_nbr(int n, size_t count);
 int			ft_countnbr_base(unsigned long n, char *base, size_t count);
 int			ft_add_size(char *flags, int diff, int isNum);
 int			check_flag(char const *str, va_list ap, int *i);
@@ -56,6 +54,15 @@ int			ft_strlen(const char *s);
 int			ft_putstr_fd(char *s, int fd, int max, int count);
 void		ft_putchar_fd(char c, int fd);
 t_format	get_size(char const *str, int *i, t_format s, char *flags);
-int			print_num_extra(char *flags, int n, int count);
+int			print_num_cont(char *flags, int n, int count, t_format size);
+int			num_size(int n, t_format size, char *flags);
+int			ft_num_dot(int n, t_format size, char *flags);
+int			ft_add_num_diff(int diff, char c);
+int			ft_set_simbol(int n, char *flags, int print);
+t_format	init_size(int val);
+int			un_cont(char *flags, unsigned long n, int count, t_format size);
+int			ft_unnum_dot(unsigned long n, t_format size, char *flags);
+int			ft_set_simbol_un(char *flags, int print);
+int			unnum_size(unsigned long n, t_format size, char *flags);
 
 #endif

@@ -6,38 +6,44 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:27:37 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/28 14:44:38 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:21:25 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_count_nbr(int n, size_t count)
+t_format	init_size(int val)
 {
-	long int	nl;
+	t_format	size;
 
-	nl = n;
-	if (nl < 0)
-		nl = -nl;
-	if (nl > 9)
-	{
-		count = ft_count_nbr(nl / 10, count);
-		count = ft_count_nbr(nl % 10, count);
-	}
-	else
-		count++;
-	return (count);
+	size.min = val;
+	size.max = val;
+	size.last = val;
+	return (size);
 }
 
-int	ft_count_unint(unsigned int nl, size_t count)
+int	un_cont(char *flags, unsigned long n, int count, t_format size)
 {
-	if (nl > 9)
+	if (ft_strchr(flags, '.'))
+		count += ft_unnum_dot(n, size, flags);
+	else if (ft_strchr(flags, '0') && !ft_strchr(flags, '-') && \
+			((unnum_size(n, size, flags) + ft_set_simbol_un(flags, 0)) \
+			<= size.last))
 	{
-		count = ft_count_unint(nl / 10, count);
-		count = ft_count_unint(nl % 10, count);
+		count += ft_add_num_diff(size.last - \
+		(unnum_size(n, size, flags) + ft_set_simbol_un(flags, 1)), '0');
+		count += ft_set_simbol_un(flags, 0);
 	}
-	else
-		count++;
+	else if ((unnum_size(n, size, flags) + ft_set_simbol_un(flags, 0)) \
+			<= size.last \
+			&& !ft_strchr(flags, '-'))
+	{
+		count += ft_add_num_diff(size.last - \
+			(unnum_size(n, size, flags) + ft_set_simbol_un(flags, 0)), ' ');
+	}
+	if (!ft_strchr(flags, '.') && (!ft_strchr(flags, '0') || \
+	(unnum_size(n, size, flags) + ft_set_simbol_un(flags, 0)) > size.last))
+		count += ft_set_simbol_un(flags, 1);
 	return (count);
 }
 
@@ -45,10 +51,11 @@ int	print_unint(unsigned int n, char *flags, t_format size)
 {
 	int	count;
 
-	count = ft_count_unint(n, 0);
-	if (count < size.last && !(ft_strchr(flags, '-')))
-		count += ft_add_size(flags, (size.last - count), 1);
-	ft_putnbr_fd_pr_unint(n, 1, count);
+	count = 0;
+	count = un_cont(flags, n, count, size);
+	if (ft_strchr(flags, '.') && n == 0 && size.max == 0)
+		return (count);
+	count = ft_putnbr_fd_pr_unint(n, 1, count);
 	return (count);
 }
 
@@ -65,17 +72,30 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (s[i] == (char)c)
 		return ((char *)(s + i));
-	return (NULL);
+	return (0);
 }
 
-int	print_num_extra(char *flags, int n, int count)
+int	print_num_cont(char *flags, int n, int count, t_format size)
 {
-	if (ft_strchr(flags, ' ') && !(ft_strchr(flags, '+')) && \
-		n >= 0)
-		ft_putchar_fd(' ', 1);
-	if (ft_strchr(flags, '+') && (n >= 0))
-		ft_putchar_fd('+', 1);
-	if (n < 0)
-		ft_putchar_fd('-', 1);
+	if (ft_strchr(flags, '.'))
+		count += ft_num_dot(n, size, flags);
+	else if (ft_strchr(flags, '0') && !ft_strchr(flags, '-') && \
+			((num_size(n, size, flags) + ft_set_simbol(n, flags, 0)) \
+			<= size.last))
+	{
+		count += ft_add_num_diff(size.last \
+			- (num_size(n, size, flags) + ft_set_simbol(n, flags, 1)), '0');
+		count += ft_set_simbol(n, flags, 0);
+	}
+	else if ((num_size(n, size, flags) + ft_set_simbol(n, flags, 0)) \
+			<= size.last \
+			&& !ft_strchr(flags, '-'))
+	{
+		count += ft_add_num_diff(size.last \
+			- (num_size(n, size, flags) + ft_set_simbol(n, flags, 0)), ' ');
+	}
+	if (!ft_strchr(flags, '.') && (!ft_strchr(flags, '0') || \
+		(num_size(n, size, flags) + ft_set_simbol(n, flags, 0)) > size.last))
+		count += ft_set_simbol(n, flags, 1);
 	return (count);
 }
