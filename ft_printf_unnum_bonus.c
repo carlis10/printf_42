@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_unnum_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:54:14 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 16:20:55 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:50:49 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,47 @@ int	unnum_size(unsigned long n, t_format size, char *flags)
 		i++;
 	}
 	return (i);
+}
+
+int	print_hexa_cont(char *num, char *flags, t_format size, char *base)
+{
+	int	count;
+	count = 0;
+	if (ft_strchr(flags, '.'))
+		count += ft_dot_hexa(num, flags, size, base);
+	else if (ft_strchr(flags, '0') && !ft_strchr(flags, '-') && \
+			(ft_strlen(num) + ft_put_simbol_hex(flags, base, 0)) \
+			<= size.last)
+	{
+		count += ft_add_num_diff(size.last \
+			- (ft_strlen(num) + ft_put_simbol_hex(flags, base, 1)), '0');
+		count += ft_put_simbol_hex(flags, base, 0);
+	}
+	else if ((ft_strlen(num) + ft_put_simbol_hex(flags, base, 0)) \
+			<= size.last \
+			&& !ft_strchr(flags, '-'))
+	{
+		count += ft_add_num_diff(size.last \
+			- (ft_strlen(num) + ft_put_simbol_hex(flags, base, 0)), ' ');
+	}
+	if (!ft_strchr(flags, '.') && (!ft_strchr(flags, '0') || \
+		(ft_strlen(num) + ft_put_simbol_hex(flags, base, 0)) > size.last))
+		count += ft_put_simbol_hex(flags, base, 1);
+	return (count);
+}
+
+int ft_dot_hexa(char *num, char *flags, t_format size, char *base)
+{
+	int	count;
+
+	count = ft_strlen(num);
+	if (count < size.max)
+		count += size.max - count;
+	count += ft_put_simbol_hex(flags, base, 0);
+	if (count < size.min && !ft_strchr(flags, '-'))
+		count += ft_add_num_diff(size.min - count, ' ');
+	ft_put_simbol_hex(flags, base, 1);
+	if (ft_strlen(num) < size.max)
+		ft_add_num_diff(size.max - ft_strlen(num), '0');
+	return (count - ft_strlen(num));
 }

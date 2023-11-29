@@ -3,31 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_extra_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:58:20 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 16:18:39 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:54:46 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_putnbr_base(unsigned long n, char *base, size_t count)
+char	*ft_putnbr_base(unsigned long n, char *base, char *num)
 {
 	unsigned int	size;
 
 	size = ft_strlen(base);
 	if (n < size)
-	{
-		ft_putchar_fd(base[n], 1);
-		count++;
-	}
+		num = ft_str_add_char(num, base[n]);
 	else if (n >= size)
 	{
-		count = ft_putnbr_base(n / size, base, count);
-		count = ft_putnbr_base(n % size, base, count);
+		num = ft_putnbr_base(n / size, base, num);
+		num = ft_putnbr_base(n % size, base, num);
 	}
-	return (count);
+	return (num);
 }
 
 int	ft_countnbr_base(unsigned long n, char *base, size_t count)

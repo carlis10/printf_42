@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 16:25:04 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:56:57 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,10 @@ t_format	get_size(char const *str, int *i, t_format s, char *flags)
 	return (s);
 }
 
-int	main()
+/* int	main()
 {
-	printf("Propia Bytes: %i\n",ft_printf("!%5x!", 52625));
-	printf("Original Bytes: %i\n",printf("!%5x!", 52625));
+	printf("Propia Bytes: %i\n",ft_printf("!%p!", "hola"));
+	printf("Original Bytes: %i\n",printf("!%p!", "hola"));
 	//system("leaks");
 	return (0);
-}
+} */

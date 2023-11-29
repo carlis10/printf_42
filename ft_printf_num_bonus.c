@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_num_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:14:07 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 15:55:06 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:33:36 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,24 @@ int	ft_add_num_diff(int diff, char c)
 	{
 		ft_putchar_fd(c, 1);
 		count++;
+	}
+	return (count);
+}
+
+int ft_put_simbol_hex(char *flags, char *base, int print)
+{
+	int	count;
+
+	count = 0;
+	if (ft_strchr(flags, '#'))
+	{
+		if (print == 1)
+			ft_putchar_fd('0', 1);
+		if (ft_strchr(flags, 'f') && print == 1)
+			ft_putchar_fd('x', 1);
+		else if (print == 1)
+			ft_putchar_fd('x', 1);
+		count += 2;
 	}
 	return (count);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:19:26 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 16:17:58 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:50:37 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,16 @@ int	print_num(int n, char *flags, t_format size)
 
 int	print_hexa(unsigned int n, char *base, char *flags, t_format size)
 {
-	int	count;
+	int		count;
+	char	*num;
 
 	count = 0;
-	if (ft_strchr(flags, '#') && n != 0)
-	{
-		ft_putchar_fd('0', 1);
-		if (ft_strchr(base, 'f'))
-			ft_putchar_fd('x', 1);
-		else
-			ft_putchar_fd('X', 1);
-		count += 2;
-	}
-	count = un_cont(flags, n, count, size);
+	num = (char *)ft_calloc(1, 1);
+	num = ft_putnbr_base(n, base, num);
+	count = print_hexa_cont(num, flags, size, base);
 	if (ft_strchr(flags, '.') && n == 0 && size.max == 0)
 		return (count);
-	count = ft_putnbr_base(n, base, count);
+	count = ft_putstr_fd(num, 1, -1, count);
 	return (count);
 }
 
@@ -83,7 +77,9 @@ int	print_void(va_list ap, char *flags, t_format size)
 {
 	int				count;
 	unsigned long	n;
+	char			*num;
 
+	num = (char *)ft_calloc(1, 1);
 	n = va_arg(ap, unsigned long);
 	count = 2;
 	count = ft_countnbr_base(n, LOW_HEX, count);
@@ -91,7 +87,8 @@ int	print_void(va_list ap, char *flags, t_format size)
 		count = ft_add_size(flags, (size.last - count), 1);
 	else
 		count = 0;
-	count += ft_putstr_fd("0x", 1, -1, 0);
-	count = ft_putnbr_base(n, LOW_HEX, count);
+	count = ft_putstr_fd("0x", 1, -1, count);
+	num = ft_putnbr_base(n, LOW_HEX, num);
+	count = ft_putstr_fd(num, 1, -1, count);
 	return (count);
 }

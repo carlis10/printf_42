@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:00:39 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 16:20:10 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:51:50 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			ft_countnbr_base(unsigned long n, char *base, size_t count);
 int			ft_add_size(char *flags, int diff, int isNum);
 int			check_flag(char const *str, va_list ap, int *i);
 int			ft_putnbr_fd_pr(long int nl, int fd, size_t count);
-int			ft_putnbr_base(unsigned long nbr, char *base, size_t count);
+char		*ft_putnbr_base(unsigned long n, char *base, char *num);
 int			ft_putnbr_fd_pr_unint(unsigned int nl, int fd, size_t count);
 int			ft_strlen(const char *s);
 int			ft_putstr_fd(char *s, int fd, int max, int count);
@@ -64,5 +64,8 @@ int			un_cont(char *flags, unsigned long n, int count, t_format size);
 int			ft_unnum_dot(unsigned long n, t_format size, char *flags);
 int			ft_set_simbol_un(char *flags, int print);
 int			unnum_size(unsigned long n, t_format size, char *flags);
+int 		ft_put_simbol_hex(char *flags, char *base, int print);
+int			print_hexa_cont(char *num, char *flags, t_format size, char *base);
+int 		ft_dot_hexa(char *num, char *flags, t_format size, char *base);
 
 #endif
