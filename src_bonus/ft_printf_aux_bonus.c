@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_aux_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_printf_aux_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:27:37 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 16:21:25 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:38:10 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../include/ft_printf_bonus.h"
 
 t_format	init_size(int val)
 {
@@ -57,22 +57,6 @@ int	print_unint(unsigned int n, char *flags, t_format size)
 		return (count);
 	count = ft_putnbr_fd_pr_unint(n, 1, count);
 	return (count);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)(s + i));
-	return (0);
 }
 
 int	print_num_cont(char *flags, int n, int count, t_format size)

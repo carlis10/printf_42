@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_aux.c                                       :+:      :+:    :+:   */
+/*   ft_printf_aux.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:27:37 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/23 16:54:07 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:36:22 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	ft_putnbr_fd_pr(int n, int fd, size_t count)
 {
@@ -56,29 +56,20 @@ int	ft_putnbr_fd_pr_unint(unsigned int nl, int fd, size_t count)
 	return (count);
 }
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putnbr_base(unsigned long n, char *base, size_t count)
 {
-	write(fd, &c, 1);
-}
+	unsigned long	size;
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
+	size = ft_strlen(base);
+	if (n < size)
 	{
-		ft_putchar_fd(s[i], fd);
-		i++;
+		ft_putchar_fd(base[n], 1);
+		count++;
 	}
-}
-
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	else if (n >= size)
+	{
+		count = ft_putnbr_base(n / size, base, count);
+		count = ft_putnbr_base(n % size, base, count);
+	}
+	return (count);
 }

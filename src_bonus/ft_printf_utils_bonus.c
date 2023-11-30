@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_utils_bonus.c                               :+:      :+:    :+:   */
+/*   ft_printf_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:19:26 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 19:50:37 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:39:08 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../include/ft_printf_bonus.h"
 
 int	print_chr(char chr, char *flags, t_format size)
 {
@@ -37,7 +37,7 @@ int	print_str(char *str, char *flags, t_format size)
 		count = ft_add_size(flags, (size.min - count), 0);
 	else
 		count = 0;
-	count += ft_putstr_fd(str, 1, size.max, 0);
+	count += ft_putstr_fd_pr(str, 1, size.max, 0);
 	return (count);
 }
 
@@ -68,8 +68,12 @@ int	print_hexa(unsigned int n, char *base, char *flags, t_format size)
 	num = ft_putnbr_base(n, base, num);
 	count = print_hexa_cont(num, flags, size, base);
 	if (ft_strchr(flags, '.') && n == 0 && size.max == 0)
+	{
+		free(num);
 		return (count);
-	count = ft_putstr_fd(num, 1, -1, count);
+	}
+	count = ft_putstr_fd_pr(num, 1, -1, count);
+	free(num);
 	return (count);
 }
 
@@ -82,13 +86,14 @@ int	print_void(va_list ap, char *flags, t_format size)
 	num = (char *)ft_calloc(1, 1);
 	n = va_arg(ap, unsigned long);
 	count = 2;
-	count = ft_countnbr_base(n, LOW_HEX, count);
+	num = ft_putnbr_base(n, LOW_HEX, num);
+	count += ft_strlen(num);
 	if (count < size.last && !(ft_strchr(flags, '-')))
 		count = ft_add_size(flags, (size.last - count), 1);
 	else
 		count = 0;
-	count = ft_putstr_fd("0x", 1, -1, count);
-	num = ft_putnbr_base(n, LOW_HEX, num);
-	count = ft_putstr_fd(num, 1, -1, count);
+	count = ft_putstr_fd_pr("0x", 1, -1, count);
+	count = ft_putstr_fd_pr(num, 1, -1, count);
+	free(num);
 	return (count);
 }

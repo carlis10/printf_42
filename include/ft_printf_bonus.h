@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:00:39 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 19:51:50 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:37:31 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
+# include "../libft/libft.h"
 # ifndef LOW_HEX
 #  define LOW_HEX "0123456789abcdef"
 # endif
@@ -40,8 +41,6 @@ int			print_num(int n, char *flags, t_format size);
 int			print_hexa(unsigned int n, char *base, char *flags, t_format size);
 int			print_void(va_list ap, char *flags, t_format size);
 int			print_unint(unsigned int n, char *flags, t_format size);
-char		*ft_strchr(const char *s, int c);
-void		*ft_calloc(size_t count, size_t size);
 int			ft_printf_cont(char const *str, va_list ap, size_t count, int i);
 char		*ft_str_add_char(char *str, char chr);
 int			ft_countnbr_base(unsigned long n, char *base, size_t count);
@@ -50,9 +49,7 @@ int			check_flag(char const *str, va_list ap, int *i);
 int			ft_putnbr_fd_pr(long int nl, int fd, size_t count);
 char		*ft_putnbr_base(unsigned long n, char *base, char *num);
 int			ft_putnbr_fd_pr_unint(unsigned int nl, int fd, size_t count);
-int			ft_strlen(const char *s);
-int			ft_putstr_fd(char *s, int fd, int max, int count);
-void		ft_putchar_fd(char c, int fd);
+int			ft_putstr_fd_pr(char *s, int fd, int max, int count);
 t_format	get_size(char const *str, int *i, t_format s, char *flags);
 int			print_num_cont(char *flags, int n, int count, t_format size);
 int			num_size(int n, t_format size, char *flags);
@@ -64,8 +61,8 @@ int			un_cont(char *flags, unsigned long n, int count, t_format size);
 int			ft_unnum_dot(unsigned long n, t_format size, char *flags);
 int			ft_set_simbol_un(char *flags, int print);
 int			unnum_size(unsigned long n, t_format size, char *flags);
-int 		ft_put_simbol_hex(char *flags, char *base, int print);
+int			ft_put_simbol_hex(char *flags, char *base, int print, char *num);
 int			print_hexa_cont(char *num, char *flags, t_format size, char *base);
-int 		ft_dot_hexa(char *num, char *flags, t_format size, char *base);
+int			ft_dot_hexa(char *num, char *flags, t_format size, char *base);
 
 #endif

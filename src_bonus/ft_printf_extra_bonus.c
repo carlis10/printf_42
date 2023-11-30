@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_extra_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:58:20 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 19:54:46 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:37:46 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../include/ft_printf_bonus.h"
 
 char	*ft_putnbr_base(unsigned long n, char *base, char *num)
 {
@@ -42,25 +42,6 @@ int	ft_countnbr_base(unsigned long n, char *base, size_t count)
 	return (count);
 }
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	void			*m;
-	size_t			i;
-	unsigned char	*l;
-
-	m = (void *)malloc(count * size);
-	if (!m)
-		return (NULL);
-	l = m;
-	i = 0;
-	while (i < (count * size))
-	{
-		l[i] = 0;
-		i++;
-	}
-	return (m);
-}
-
 char	*ft_str_add_char(char *str, char chr)
 {
 	char	*res;
@@ -74,6 +55,7 @@ char	*ft_str_add_char(char *str, char chr)
 		i++;
 	}
 	res[i] = chr;
+	free(str);
 	return (res);
 }
 

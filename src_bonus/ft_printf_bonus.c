@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 19:56:57 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:50:11 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../include/ft_printf_bonus.h"
 #include <stdio.h>
 
 int	read_arg(char chr, va_list ap, t_format size, char *flags)
@@ -82,7 +82,6 @@ int	check_flag(char const *str, va_list ap, int *i)
 	int			count;
 	t_format	size;
 	char		*flags;
-	char		*tmp;
 
 	flags = (char *)ft_calloc(1, 1);
 	count = 0;
@@ -91,9 +90,7 @@ int	check_flag(char const *str, va_list ap, int *i)
 	while (str[*i + 1] == '#' || str[*i + 1] == '+' || str[*i + 1] == ' ' || \
 			str[*i + 1] == '.' || str[*i + 1] == '0' || str[*i + 1] == '-')
 	{
-		tmp = flags;
-		flags = ft_str_add_char(tmp, str[*i + 1]);
-		free(tmp);
+		flags = ft_str_add_char(flags, str[*i + 1]);
 		i[0]++;
 		if ((str[*i + 1] >= '0' && str[*i + 1] <= '9') || ft_strchr(flags, '.'))
 			size = get_size(str, i, size, flags);
@@ -131,8 +128,7 @@ t_format	get_size(char const *str, int *i, t_format s, char *flags)
 
 /* int	main()
 {
-	printf("Propia Bytes: %i\n",ft_printf("!%p!", "hola"));
-	printf("Original Bytes: %i\n",printf("!%p!", "hola"));
-	//system("leaks");
+	printf("Propia Bytes: %i\n",ft_printf("%0#.5x", UINT_MAX));
+	printf("Original Bytes: %i\n",printf("%0#.5x", UINT_MAX));
 	return (0);
 } */

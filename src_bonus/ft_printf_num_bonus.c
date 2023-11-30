@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_num_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:14:07 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/29 19:33:36 by Carlos           ###   ########.fr       */
+/*   Updated: 2023/11/30 12:34:48 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../include/ft_printf_bonus.h"
 
 int	ft_num_dot(int n, t_format size, char *flags)
 {
@@ -95,19 +95,21 @@ int	ft_add_num_diff(int diff, char c)
 	return (count);
 }
 
-int ft_put_simbol_hex(char *flags, char *base, int print)
+int	ft_put_simbol_hex(char *flags, char *base, int print, char *num)
 {
 	int	count;
 
 	count = 0;
+	if (num[0] == '0' && ft_strlen(num) == 1)
+		return (count);
 	if (ft_strchr(flags, '#'))
 	{
 		if (print == 1)
 			ft_putchar_fd('0', 1);
-		if (ft_strchr(flags, 'f') && print == 1)
+		if (ft_strchr(base, 'f') && print == 1)
 			ft_putchar_fd('x', 1);
 		else if (print == 1)
-			ft_putchar_fd('x', 1);
+			ft_putchar_fd('X', 1);
 		count += 2;
 	}
 	return (count);

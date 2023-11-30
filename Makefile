@@ -6,48 +6,71 @@
 #    By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 12:56:54 by Carlos            #+#    #+#              #
-#    Updated: 2023/11/29 16:19:20 by cravegli         ###   ########.fr        #
+#    Updated: 2023/11/30 15:11:07 by cravegli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
 
-SRC = printf_aux.c printf_utils.c ft_printf.c ft_putnbr_base.c
+NAME			= libftprintf.a
+INCLUDE			= include
+LIBFT			= libft
+SRC_DIR			= src/
+SRC_DIR_BONUS	= src_bonus/
+OBJ_DIR			= obj/
+OBJ_DIR_BONUS	= obj_bonus/
+CC				= gcc
+CFLAGS			= -Wall -Werror -Wextra -I
+RM				= rm -f
+AR				= ar rcs
 
-OBJ = ${SRC:.c=.o}
 
-BONUS = ft_printf_bonus.c printf_utils_bonus.c printf_aux_bonus.c \
-		ft_printf_extra_bonus.c ft_add_size_bonus.c ft_printf_num_bonus.c \
-		ft_printf_unnum_bonus.c
+SRC			= ft_printf.c ft_printf_utils.c ft_printf_aux.c
 
-BONUS_OBJ = ${BONUS:.c=.o}
+SRC_BONUS	= ft_add_size_bonus.c ft_printf_bonus.c ft_printf_extra_bonus.c \
+			ft_printf_num_bonus.c ft_printf_unnum_bonus.c ft_printf_aux_bonus.c \
+			ft_printf_utils_bonus.c
 
-CFLAGS = -Wall -Wextra -Werror
+OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-CC = gcc $(CFLAGS) -c
+OBJ_BONUS	=	$(addprefix $(OBJ_DIR_BONUS), $(SRC_BONUS:.c=.o))
 
-LIB = ar rc $(NAME)
+OBJS		= .cache_exists
 
-RANLIB = ranlib $(NAME)
+all:		$(NAME)
 
-RM = rm -f
+$(NAME):	$(OBJ)
+			@make -C $(LIBFT)
+			@cp libft/libft.a .
+			@mv libft.a $(NAME)
+			@$(AR) $(NAME) $(OBJ)
 
-$(NAME):
-	@$(CC) $(SRC)
-	@$(LIB) $(OBJ)
-	@$(RANLIB)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-bonus:
-	@$(CC) $(BONUS)
-	@$(LIB) $(BONUS_OBJ)
-	@$(RANLIB)
+bonus:		$(OBJ_BONUS)
+			@make -C $(LIBFT)
+			@cp libft/libft.a .
+			@mv libft.a $(NAME)
+			@$(AR) $(NAME) $(OBJ_BONUS)
 
-all: $(NAME)
+$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c | $(OBJS)
+			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+$(OBJ_DIR):
+			@mkdir -p $(OBJ_DIR)
+
+$(OBJS):
+			@mkdir -p $(OBJ_DIR_BONUS)
 
 clean:
-	@$(RM) $(OBJ) $(BONUS_OBJ)
+			@$(RM) -rf $(OBJ_DIR)
+			@$(RM) -rf $(OBJ_DIR_BONUS)
+			@make clean -C $(LIBFT)
 
-fclean: clean
-	@$(RM) $(NAME)
+fclean:		clean
+			@$(RM) -f $(NAME)
+			@$(RM) -f $(LIBFT)/libft.a
 
-re: fclean all
+re:			fclean all
+
+.PHONY:		all clean fclean re
