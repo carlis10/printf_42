@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+         #
+#    By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 12:56:54 by Carlos            #+#    #+#              #
-#    Updated: 2023/11/30 15:11:07 by cravegli         ###   ########.fr        #
+#    Updated: 2023/12/01 13:53:18 by Carlos           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,6 @@ OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 OBJ_BONUS	=	$(addprefix $(OBJ_DIR_BONUS), $(SRC_BONUS:.c=.o))
 
-OBJS		= .cache_exists
-
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
@@ -53,13 +51,13 @@ bonus:		$(OBJ_BONUS)
 			@mv libft.a $(NAME)
 			@$(AR) $(NAME) $(OBJ_BONUS)
 
-$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c | $(OBJS)
+$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c | $(OBJ_DIR_BONUS)
 			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJ_DIR):
 			@mkdir -p $(OBJ_DIR)
 
-$(OBJS):
+$(OBJ_DIR_BONUS):
 			@mkdir -p $(OBJ_DIR_BONUS)
 
 clean:

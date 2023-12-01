@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+         #
+#    By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 11:40:28 by Carlos            #+#    #+#              #
-#    Updated: 2023/11/30 15:19:48 by cravegli         ###   ########.fr        #
+#    Updated: 2023/12/01 14:25:38 by Carlos           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ BONUS			=	ft_lstadd_back.c ft_lstadd_front.c ft_lstdelone.c ft_lstiter.c ft_lstl
 
 BONUS_OBJS		=$(BONUS:.c=.o)
 
-CC					= gcc -c
+CC					= gcc
 RM					= rm -f
 CFLAGS			= -Wall -Wextra -Werror
 AR				= ar rcs
@@ -38,6 +38,12 @@ $(NAME):		$(OBJS)
 
 bonus:			$(BONUS_OBJS)
 				@$(AR) $(NAME) $(BONUS_OBJS)
+
+$(OBJ)%.o:		$(SRC)%.c
+				@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_BONUS)%.o:$(SRC_BONUS)%.c
+				@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 				@$(RM) $(OBJS) $(BONUS_OBJS)
