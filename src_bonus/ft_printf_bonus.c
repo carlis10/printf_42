@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:04:35 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/30 14:50:11 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:56:00 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_format	get_size(char const *str, int *i, t_format s, char *flags)
 
 /* int	main()
 {
-	printf("Propia Bytes: %i\n",ft_printf("%0#.5x", UINT_MAX));
-	printf("Original Bytes: %i\n",printf("%0#.5x", UINT_MAX));
+	printf("Propia Bytes: %i\n",ft_printf("|%i|", INT_MAX));
+	printf("Original Bytes: %i\n",printf("|%i|", 54));
 	return (0);
 } */

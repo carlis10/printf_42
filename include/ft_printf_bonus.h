@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:00:39 by cravegli          #+#    #+#             */
-/*   Updated: 2023/11/30 14:37:31 by cravegli         ###   ########.fr       */
+/*   Updated: 2023/12/04 12:24:05 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int			print_void(va_list ap, char *flags, t_format size);
 int			print_unint(unsigned int n, char *flags, t_format size);
 int			ft_printf_cont(char const *str, va_list ap, size_t count, int i);
 char		*ft_str_add_char(char *str, char chr);
-int			ft_countnbr_base(unsigned long n, char *base, size_t count);
 int			ft_add_size(char *flags, int diff, int isNum);
 int			check_flag(char const *str, va_list ap, int *i);
 int			ft_putnbr_fd_pr(long int nl, int fd, size_t count);
