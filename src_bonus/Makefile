@@ -6,13 +6,15 @@
 #    By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 13:36:17 by cravegli          #+#    #+#              #
-#    Updated: 2023/12/07 13:50:59 by cravegli         ###   ########.fr        #
+#    Updated: 2023/12/13 14:18:07 by cravegli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= ../libftprintf.a
-INCLUDE			= include
-SRC_DIR_BONUS	= .
+DIR_LIBFT		= ../libft/
+LIBFT			= ../libft/libft.a
+INCLUDE			= include/ft_printf.h
+SRC_DIR_BONUS	= ./
 OBJ_DIR_BONUS	= ../obj_bonus/
 CC				= gcc
 CFLAGS			= -Wall -Werror -Wextra -I
@@ -29,9 +31,12 @@ OBJ_BONUS	=	$(addprefix $(OBJ_DIR_BONUS), $(SRC_BONUS:.c=.o))
 all:		$(NAME)
 
 $(NAME):	$(OBJ_BONUS)
+			@make -C $(DIR_LIBFT)
+			@cp $(LIBFT) ../
+			@mv ../libft.a $(NAME)
 			@$(AR) $(NAME) $(OBJ_BONUS)
 
-$(OBJ_BONUS): $(SRC_BONUS) | $(OBJ_DIR_BONUS)
+$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c | $(OBJ_DIR_BONUS)
 			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJ_DIR_BONUS):
